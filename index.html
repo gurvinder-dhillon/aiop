@@ -444,10 +444,17 @@
                 </div>
 
                 <p style="color: #a0a0a0; max-width: 600px; margin: 2rem auto;">
-                    Just as OOP transformed software in the 1980s, AiOP will revolutionize how we build intelligent
+                    Just as OOP transformed software in the 1980s, AOP will revolutionize how we build intelligent
                     systems.
                     Native language support for AI agents, tools, and orchestration.
                 </p>
+<div style="margin-top: 2rem;">
+    <a href="#" class="cta-button" onclick="openBlogPost()">📖 New to AOP? Start Here</a>
+</div>
+
+<div style="margin-top: 2rem; color: #888; font-size: 0.9rem;">
+    <p>By <strong style="color: #667eea;">Gurvinder Dhillon</strong></p>
+</div>
             </div>
         </div>
     </section>
@@ -590,7 +597,7 @@
                 <p style="font-size: 1.2rem; color: #a0a0a0; text-align: center;">
                     The fragmentation crisis is real. Hundreds of frameworks, incompatible protocols, and N×M
                     integration problems.
-                    <strong style="color: #667eea;">AiOP provides the unifying paradigm the industry desperately
+                    <strong style="color: #667eea;">AOP provides the unifying paradigm the industry desperately
                         needs.</strong>
                 </p>
             </div>
@@ -646,10 +653,12 @@
             </p>
 
             <div style="margin-top: 3rem;" class="scroll-reveal">
-                <a href="#" class="cta-button">Read the Full Proposal</a>
-                <a href="#" class="cta-button"
-                    style="margin-left: 1rem; background: transparent; border: 2px solid #667eea;">Join the
-                    Community</a>
+                <a href="#" class="cta-button" onclick="openBlogPost()">What is AOP? (Start Here)</a>
+                <a href="#" class="cta-button" onclick="openFullProposal()"
+                    style="margin-left: 1rem; background: transparent; border: 2px solid #667eea;">Read Full
+                    Proposal</a>
+                <a href="#" class="cta-button" onclick="joinCommunity()"
+                    style="margin-left: 1rem; background: transparent; border: 2px solid #667eea;">Join Community</a>
             </div>
 
             <div style="margin-top: 3rem; color: #666;">
@@ -763,6 +772,25 @@
             }
         `;
         document.head.appendChild(style);
+
+    // Function to open blog post
+    function openBlogPost ()
+    {
+        window.location.href = 'aop_intro.html';
+    }
+
+    // Function to open full proposal
+    function openFullProposal ()
+    {
+        window.location.href = 'aop_full_proposal.html';
+    }
+
+    // Function to join community
+    function joinCommunity ()
+    {
+        // For now, this could link to a GitHub repo, Discord, or contact form
+        alert('Community features coming soon! Follow @gurvinderdhillon for updates.');
+    }
     </script>
 </body>
 

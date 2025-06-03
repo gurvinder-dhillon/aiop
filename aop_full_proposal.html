@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent-Oriented Programming: Reimagining Software for the AI Era</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.7;
+        }
+
+        /* Background Animation */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e, #0f3460);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: #a0a0a0;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        /* Main Container */
+        .proposal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        /* Header */
+        .proposal-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .proposal-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .proposal-subtitle {
+            font-size: 1.3rem;
+            color: #a0a0a0;
+            margin-bottom: 2rem;
+        }
+
+        .proposal-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .author-highlight {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .author-highlight h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .toc h3 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .toc-section {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .toc-section h4 {
+            color: #ffffff;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .toc a {
+            color: #a0a0a0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            display: block;
+            padding: 0.2rem 0;
+        }
+
+        .toc a:hover {
+            color: #667eea;
+        }
+
+        /* Content Sections */
+        .section {
+            margin-bottom: 4rem;
+            scroll-margin-top: 100px;
+        }
+
+        .section h2 {
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .section h3 {
+            font-size: 1.6rem;
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .section p {
+            margin-bottom: 1.5rem;
+            color: #c0c0c0;
+            font-size: 1.1rem;
+        }
+
+        .section ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .section li {
+            color: #c0c0c0;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .highlight-box h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+
+        /* Code Blocks */
+        .code-section {
+            margin: 3rem 0;
+        }
+
+        .code-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .code-block h5 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+
+        .code-block pre {
+            color: #e0e0e0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .code-block.traditional h5 {
+            color: #ff6b6b;
+        }
+
+        .code-block.aop h5 {
+            color: #4ecdc4;
+        }
+
+        /* Syntax Highlighting */
+        .keyword {
+            color: #ff6b6b;
+        }
+
+        .string {
+            color: #4ecdc4;
+        }
+
+        .comment {
+            color: #95a5a6;
+        }
+
+        .function {
+            color: #f39c12;
+        }
+
+        /* Tables */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-table th {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            color: #c0c0c0;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Evolution Grid */
+        .evolution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .evolution-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .evolution-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .evolution-item h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .evolution-item p {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            margin-bottom: 1rem;
+        }
+
+        .evolution-item code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #4ecdc4;
+        }
+
+        /* Implementation Roadmap */
+        .roadmap {
+            display: grid;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .roadmap-phase {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .roadmap-phase::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .roadmap-phase h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid #667eea;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 4rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .proposal-container {
+                padding: 6rem 1rem 4rem;
+            }
+
+            .code-comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .evolution-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .proposal-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .nav-container>div {
+                display: none;
+            }
+
+            .nav-container>div:first-child {
+                display: block;
+            }
+        }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-animation"></div>
+    <div class="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo" onclick="goToHomepage()">AOP</a>
+            <div>
+                <a href="#" class="nav-link" onclick="goToHomepage()">Home</a>
+                <a href="#" class="nav-link" onclick="goToBlog()">What is AOP?</a>
+                <a href="#vision" class="nav-link">Vision</a>
+                <a href="#examples" class="nav-link">Examples</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="proposal-container">
+        <!-- Header -->
+        <header class="proposal-header fade-in">
+            <h1 class="proposal-title">Agent-Oriented Programming</h1>
+            <p class="proposal-subtitle">Reimagining Software for the AI Era</p>
+            <div class="proposal-meta">
+                <span>📅 December 2024</span>
+                <span>📖 15 min read</span>
+                <span>🚀 Full Proposal</span>
+            </div>
+            <div class="author-highlight">
+                <h4>A Revolutionary Vision</h4>
+                <p>Pioneering the next paradigm in software development</p>
+            </div>
+        </header>
+
+        <!-- Table of Contents -->
+        <div class="toc fade-in">
+            <h3>📋 Proposal Overview</h3>
+            <div class="toc-grid">
+                <div class="toc-section">
+                    <h4>The Vision</h4>
+                    <a href="#vision">From Fragmentation to Innovation</a>
+                    <a href="#history">Learning from History</a>
+                </div>
+                <div class="toc-section">
+                    <h4>The Revolution</h4>
+                    <a href="#aop-solution">Native Language Integration</a>
+                    <a href="#examples">Code Examples</a>
+                </div>
+                <div class="toc-section">
+                    <h4>Implementation</h4>
+                    <a href="#roadmap">Roadmap</a>
+                    <a href="#transformation">Why AOP Will Transform Everything</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vision Section -->
+        <section id="vision" class="section fade-in">
+            <h2>The Vision: From Fragmentation to Innovation</h2>
+
+            <p>The AI development landscape is exploding with innovation, but this rapid growth has created a new
+                challenge: countless frameworks, SDKs, and protocols that don't work together. Every day brings exciting
+                new tools, but developers spend more time integrating systems than building intelligent solutions.</p>
+
+            <div class="highlight-box">
+                <h4>🚀 Today's Exciting but Fragmented Ecosystem</h4>
+                <p>
+                    <strong>Frameworks & SDKs:</strong> LangChain (Python/JS), OpenAI SDK, LiteLLM, Vercel AI SDK,
+                    Mastra, CrewAI, Google AI SDK<br>
+                    <strong>Protocols & Standards:</strong> Model Context Protocol (MCP), Google Agent-to-Agent (A2A),
+                    IBM Agent Communication Protocol (ACP), llm.txt
+                </p>
+            </div>
+
+            <p><strong>The Opportunity:</strong> Developers are ready for the next paradigm that unifies this incredible
+                innovation into a cohesive, powerful development experience.</p>
+        </section>
+
+        <!-- History Section -->
+        <section id="history" class="section fade-in">
+            <h2>Learning from History: How Innovation Creates Standards</h2>
+
+            <p>Technology always follows the same evolutionary pattern: <strong>Innovation → Fragmentation →
+                    Standardization → Breakthrough</strong></p>
+
+            <h3>Programming Paradigms Evolution</h3>
+            <div class="evolution-grid">
+                <div class="evolution-item">
+                    <h4>Procedural</h4>
+                    <p>1970s<br>Functions & Procedures</p>
+                    <code>function calculate()</code>
+                </div>
+                <div class="evolution-item">
+                    <h4>Object-Oriented</h4>
+                    <p>1980s<br>Classes & Methods</p>
+                    <code>class Calculator</code>
+                </div>
+                <div class="evolution-item">
+                    <h4>Agent-Oriented</h4>
+                    <p>2020s<br>Agents & Tools</p>
+                    <code>agent Assistant</code>
+                </div>
+            </div>
+
+            <h3>Web Standards Evolution</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Era</th>
+                        <th>Technology</th>
+                        <th>Purpose</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1990s</td>
+                        <td><strong>HTML</strong></td>
+                        <td>Structure</td>
+                        <td><code>&lt;div&gt;content&lt;/div&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>1996</td>
+                        <td><strong>CSS</strong></td>
+                        <td>Styling</td>
+                        <td><code>.class { color: blue; }</code></td>
+                    </tr>
+                    <tr>
+                        <td>2013</td>
+                        <td><strong>React</strong></td>
+                        <td>Components</td>
+                        <td><code>&lt;Component prop="value" /&gt;</code></td>
+                    </tr>
+                    <tr>
+                        <td>2024</td>
+                        <td><strong>AOP HTML</strong></td>
+                        <td>AI Integration</td>
+                        <td><code>&lt;agent model="gpt-4" /&gt;</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- AOP Solution Section -->
+        <section id="aop-solution" class="section fade-in">
+            <h2>The AOP Revolution: Native Language Integration</h2>
+
+            <p>Instead of learning countless frameworks, imagine if agents were <strong>first-class citizens</strong> in
+                programming languages—as natural as classes in OOP.</p>
+
+            <div class="highlight-box">
+                <h4>🎯 Core Concept Mapping</h4>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Traditional OOP</th>
+                            <th>Agent-Oriented Programming</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>class</code></td>
+                            <td><code>agent</code></td>
+                            <td>Define intelligent entities</td>
+                        </tr>
+                        <tr>
+                            <td><code>method</code></td>
+                            <td><code>tool</code></td>
+                            <td>Define capabilities</td>
+                        </tr>
+                        <tr>
+                            <td><code>new Class()</code></td>
+                            <td><code>new Agent()</code></td>
+                            <td>Instantiate</td>
+                        </tr>
+                        <tr>
+                            <td><code>object.method()</code></td>
+                            <td><code>agent.tool()</code></td>
+                            <td>Execute</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Code Examples Section -->
+        <section id="examples" class="section fade-in">
+            <h2>Code Examples: The AOP Way</h2>
+
+            <h3>🐍 Python: From Classes to Agents</h3>
+            <div class="code-comparison">
+                <div class="code-block traditional">
+                    <h5>❌ Traditional OOP</h5>
+                    <pre><code><span class="keyword">class</span> <span class="function">ResearchAssistant</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, api_key):
+        self.openai = OpenAI(api_key=api_key)
+        self.search = SearchAPI(key="...")
+
+    <span class="keyword">def</span> <span class="function">search_web</span>(self, query):
+        <span class="comment"># Manual API orchestration</span>
+        results = self.search.query(query)
+        response = self.openai.chat.completions.create(
+            model=<span class="string">"gpt-4"</span>,
+            messages=[{<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: f<span class="string">"Analyze: {results}"</span>}]
+        )
+        <span class="keyword">return</span> response.choices[0].message.content</code></pre>
+                </div>
+
+                <div class="code-block aop">
+                    <h5>✅ Agent-Oriented Programming</h5>
+                    <pre><code><span class="keyword">agent</span> <span class="function">ResearchAssistant</span>():
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, model=<span class="string">"gpt-4"</span>, provider=<span class="string">"openai"</span>):
+        <span class="keyword">super</span>().__init__(model=model, provider=provider)
+
+    <span class="keyword">tool</span> <span class="function">search_web</span>(self, query: str) -> SearchResults:
+        <span class="comment"># Native AI integration - no manual orchestration</span>
+        <span class="keyword">return</span> web_search(query)
+
+    <span class="keyword">tool</span> <span class="function">analyze_content</span>(self, content: str) -> Analysis:
+        <span class="comment"># Built-in LLM processing</span>
+        <span class="keyword">return</span> llm_analyze(content)
+
+    <span class="keyword">tool</span> <span class="function">research_topic</span>(self, topic: str) -> Report:
+        <span class="comment"># Tool composition</span>
+        results = self.search_web(topic)
+        analysis = self.analyze_content(results.content)
+        <span class="keyword">return</span> generate_report(analysis)</code></pre>
+                </div>
+            </div>
+
+            <h3>🌐 HTML: Native Agent Elements</h3>
+            <div class="code-comparison">
+                <div class="code-block traditional">
+                    <h5>❌ Traditional Web Integration</h5>
+                    <pre><code><span class="comment">&lt;!-- Complex JavaScript required --&gt;</span>
+<span class="keyword">&lt;div</span> <span class="string">id="chat-container"</span><span class="keyword">&gt;</span>
+    <span class="keyword">&lt;div</span> <span class="string">id="messages"</span><span class="keyword">&gt;&lt;/div&gt;</span>
+    <span class="keyword">&lt;input</span> <span class="string">id="user-input"</span> <span class="string">type="text"</span> <span class="keyword">/&gt;</span>
+    <span class="keyword">&lt;button</span> <span class="string">onclick="sendMessage()"</span><span class="keyword">&gt;</span>Send<span class="keyword">&lt;/button&gt;</span>
+<span class="keyword">&lt;/div&gt;</span>
+
+<span class="keyword">&lt;script&gt;</span>
+<span class="keyword">async function</span> <span class="function">sendMessage</span>() {
+    <span class="keyword">const</span> input = document.getElementById(<span class="string">'user-input'</span>).value;
+    <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="function">fetch</span>(<span class="string">'/api/chat'</span>, {
+        method: <span class="string">'POST'</span>,
+        body: JSON.stringify({ message: input })
+    });
+    <span class="comment">// Complex response handling...</span>
+}
+<span class="keyword">&lt;/script&gt;</span></code></pre>
+                </div>
+
+                <div class="code-block aop">
+                    <h5>✅ Agent-Oriented HTML</h5>
+                    <pre><code><span class="comment">&lt;!-- Native agent integration --&gt;</span>
+<span class="keyword">&lt;agent</span> <span class="string">id="assistant"</span>
+       <span class="string">model="gpt-4"</span>
+       <span class="string">provider="openai"</span>
+       <span class="string">temperature="0.7"</span><span class="keyword">&gt;</span>
+
+    <span class="keyword">&lt;agent-prompt</span> <span class="string">type="system"</span><span class="keyword">&gt;</span>
+        You are a helpful research assistant.
+    <span class="keyword">&lt;/agent-prompt&gt;</span>
+
+    <span class="keyword">&lt;tool</span> <span class="string">name="search"</span> <span class="string">endpoint="/api/search"</span><span class="keyword">&gt;</span>
+        <span class="keyword">&lt;tool-param</span> <span class="string">name="query"</span> <span class="string">type="string"</span> <span class="string">required</span> <span class="keyword">/&gt;</span>
+        <span class="keyword">&lt;tool-param</span> <span class="string">name="limit"</span> <span class="string">type="number"</span> <span class="string">default="10"</span> <span class="keyword">/&gt;</span>
+    <span class="keyword">&lt;/tool&gt;</span>
+<span class="keyword">&lt;/agent&gt;</span>
+
+<span class="keyword">&lt;agent-chat</span> <span class="string">agent="assistant"</span>
+            <span class="string">placeholder="Ask me anything..."</span><span class="keyword">/&gt;</span></code></pre>
+                </div>
+            </div>
+
+            <h3>🔗 REST API: Agent-Native Endpoints</h3>
+            <div class="code-comparison">
+                <div class="code-block traditional">
+                    <h5>❌ Traditional REST</h5>
+                    <pre><code><span class="keyword">POST</span> /api/completions HTTP/1.1
+<span class="string">Content-Type</span>: application/json
+
+{
+    <span class="string">"model"</span>: <span class="string">"gpt-4"</span>,
+    <span class="string">"messages"</span>: [{
+        <span class="string">"role"</span>: <span class="string">"user"</span>,
+        <span class="string">"content"</span>: <span class="string">"Hello"</span>
+    }],
+    <span class="string">"temperature"</span>: <span class="string">0.7</span>
+}</code></pre>
+                </div>
+
+                <div class="code-block aop">
+                    <h5>✅ Agent-Oriented REST</h5>
+                    <pre><code><span class="keyword">CHAT</span> /agents/assistant HTTP/1.1
+<span class="string">Agent-Model</span>: gpt-4
+<span class="string">Agent-Temperature</span>: 0.7
+<span class="string">Content-Type</span>: application/json
+
+{
+    <span class="string">"message"</span>: <span class="string">"Hello"</span>,
+    <span class="string">"context"</span>: <span class="string">"research_session_123"</span>
+}
+
+<span class="comment">// New HTTP methods:</span>
+<span class="keyword">TOOL</span> /agents/assistant/search
+<span class="keyword">COMPOSE</span> /agents/assistant/workflow</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Implementation Roadmap -->
+        <section id="roadmap" class="section fade-in">
+            <h2>Implementation Roadmap</h2>
+
+            <div class="roadmap">
+                <div class="roadmap-phase">
+                    <h4>Phase 1: Library Foundation</h4>
+                    <p>Start with libraries that mimic AOP syntax, allowing immediate adoption while building community
+                        support.</p>
+                    <div class="code-block">
+                        <pre><code><span class="comment"># Start with libraries that mimic AOP syntax</span>
+<span class="keyword">from</span> aop <span class="keyword">import</span> agent, tool
+
+<span class="function">@agent</span>
+<span class="keyword">class</span> <span class="function">MyAgent</span>:
+    <span class="function">@tool</span>
+    <span class="keyword">def</span> <span class="function">process</span>(self, data):
+        <span class="keyword">return</span> result</code></pre>
+                    </div>
+                </div>
+
+                <div class="roadmap-phase">
+                    <h4>Phase 2: Language Extensions</h4>
+                    <p>Transpilers convert AOP syntax to current languages, enabling native-feeling development.</p>
+                    <div class="code-block">
+                        <pre><code><span class="comment"># Transpilers convert AOP syntax to current languages</span>
+<span class="keyword">agent</span> <span class="function">MyAgent</span>():
+    <span class="keyword">tool</span> <span class="function">process</span>(self, data: str) -> Result:
+        <span class="keyword">return</span> result
+
+<span class="comment"># Compiles to standard Python</span></code></pre>
+                    </div>
+                </div>
+
+                <div class="roadmap-phase">
+                    <h4>Phase 3: Native Integration</h4>
+                    <p>Languages natively understand agents, providing full compiler support and optimization.</p>
+                    <div class="code-block">
+                        <pre><code><span class="comment"># Languages natively understand agents</span>
+<span class="keyword">agent</span> <span class="function">MyAgent</span>():
+    <span class="keyword">tool</span> <span class="function">process</span>(self, data: str) -> Result:
+        <span class="keyword">return</span> result  <span class="comment"># Native execution</span></code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transformation Table -->
+        <section class="section fade-in">
+            <h2>Transformation Table: Current vs AOP</h2>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Today's Approach</th>
+                        <th>With AOP Revolution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Learning</strong></td>
+                        <td>Master multiple frameworks</td>
+                        <td>Learn one universal paradigm</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Integration</strong></td>
+                        <td>Manual, complex setup</td>
+                        <td>Automatic, seamless</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Portability</strong></td>
+                        <td>Framework-locked</td>
+                        <td>Universal across languages</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Development</strong></td>
+                        <td>Framework-specific patterns</td>
+                        <td>Language-native constructs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Type Safety</strong></td>
+                        <td>Limited/Framework-dependent</td>
+                        <td>Full compile-time verification</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Innovation</strong></td>
+                        <td>Siloed in frameworks</td>
+                        <td>Shared through inheritance</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Why AOP Will Transform Everything -->
+        <section id="transformation" class="section fade-in">
+            <h2>Why AOP Will Transform Everything</h2>
+
+            <div class="evolution-grid">
+                <div class="evolution-item">
+                    <h4>Historical Precedent</h4>
+                    <p>Every major breakthrough followed this path</p>
+                </div>
+                <div class="evolution-item">
+                    <h4>Developer Excitement</h4>
+                    <p>The community is ready for the next evolution</p>
+                </div>
+                <div class="evolution-item">
+                    <h4>Industry Momentum</h4>
+                    <p>Universal standards unlock exponential innovation</p>
+                </div>
+                <div class="evolution-item">
+                    <h4>Natural Progression</h4>
+                    <p>Logical next step from Object-Oriented Programming</p>
+                </div>
+                <div class="evolution-item">
+                    <h4>Economic Opportunity</h4>
+                    <p>Simplified integration accelerates development</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vision Section -->
+        <section class="section fade-in">
+            <h2>The Vision: Universal Agent Standard</h2>
+
+            <div class="highlight-box">
+                <h4>🌍 Programming Languages Unite</h4>
+                <ul>
+                    <li><strong>Python:</strong> <code>agent MyAgent():</code></li>
+                    <li><strong>TypeScript:</strong> <code>agent MyAgent() {}</code></li>
+                    <li><strong>Go:</strong> <code>type MyAgent interface { Agent }</code></li>
+                    <li><strong>Rust:</strong> <code>trait MyAgent: Agent</code></li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🌐 Web Technologies Evolve</h4>
+                <ul>
+                    <li><strong>HTML:</strong> <code>&lt;agent model="gpt-4" /&gt;</code></li>
+                    <li><strong>CSS:</strong> <code>.agent { display: intelligent; }</code></li>
+                    <li><strong>JavaScript:</strong> <code>new Agent("gpt-4")</code></li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h4>🔗 Data & APIs Transform</h4>
+                <ul>
+                    <li><strong>JSON:</strong> <code>{"agent": {"model": "gpt-4"}}</code></li>
+                    <li><strong>REST:</strong> <code>CHAT /agents/assistant</code></li>
+                    <li><strong>GraphQL:</strong> <code>mutation { chatWithAgent }</code></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="section fade-in">
+            <h2>Conclusion</h2>
+
+            <p>Just as Object-Oriented Programming didn't replace procedural programming overnight, Agent-Oriented
+                Programming won't immediately replace current AI frameworks. But it will provide the <strong>unifying
+                    paradigm</strong> that transforms fragmentation into systematic innovation.</p>
+
+            <p>The question isn't whether this transformation will happen—it's whether we'll lead the revolution or
+                follow it.</p>
+
+            <div class="highlight-box">
+                <h4>🚀 The future of software is agent-oriented. The revolution starts now.</h4>
+                <p>Ready to reimagine how we build intelligent systems? Join the Agent-Oriented Programming movement.
+                </p>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <div class="cta-section fade-in">
+            <h3 style="color: #667eea; margin-bottom: 1rem;">Join the AOP Revolution</h3>
+            <p style="margin-bottom: 2rem;">Be part of the movement that will define the next era of software
+                development.</p>
+
+            <a href="#" class="cta-button" onclick="goToHomepage()">Explore AOP</a>
+            <a href="#" class="cta-button" onclick="goToBlog()">Learn the Basics</a>
+            <a href="#" class="cta-button secondary">Join Community</a>
+
+            <div style="margin-top: 2rem; color: #888;">
+                <p>Ready to transform how the world builds intelligent systems?</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div style="margin-bottom: 1rem; color: #667eea;">
+                <p>By <strong>Gurvinder Dhillon</strong></p>
+                <p style="font-size: 0.9rem; color: #888; margin-top: 0.5rem;">Pioneering the future of Agent-Oriented
+                    Programming</p>
+            </div>
+            <a href="#" class="nav-link" onclick="goToHomepage()">← Back to Homepage</a>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor =>
+        {
+            anchor.addEventListener('click', function (e)
+            {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) =>
+        {
+            entries.forEach(entry =>
+            {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el =>
+        {
+            observer.observe(el);
+        });
+
+        // Scroll progress indicator
+        window.addEventListener('scroll', () =>
+        {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.querySelector('.scroll-progress').style.width = scrollPercent + '%';
+        });
+
+        // Navigation functions
+        function goToHomepage ()
+        {
+            window.location.href = 'index.html';
+        }
+
+        function goToBlog ()
+        {
+            window.location.href = 'aop_intro.html';
+        }
+
+        // Add interactive hover effects
+        document.querySelectorAll('.code-block').forEach(block =>
+        {
+            block.addEventListener('mouseenter', () =>
+            {
+                block.style.transform = 'scale(1.02)';
+                block.style.borderColor = 'rgba(102, 126, 234, 0.5)';
+            });
+
+            block.addEventListener('mouseleave', () =>
+            {
+                block.style.transform = 'scale(1)';
+                block.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+            });
+        });
+    </script>
+</body>
+
+</html>
