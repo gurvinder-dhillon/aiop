@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent-Oriented Programming - The Future of Software Development</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Animated Background */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e, #0f3460);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-content .subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            margin-bottom: 2rem;
+            color: #a0a0a0;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .paradigm-shift {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .paradigm-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            min-width: 200px;
+            transition: all 0.3s ease;
+        }
+
+        .paradigm-box:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .paradigm-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #667eea;
+        }
+
+        .arrow {
+            font-size: 2rem;
+            color: #667eea;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        /* Code Comparison Section */
+        .code-comparison {
+            padding: 8rem 0;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .code-containers {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 2rem;
+            margin: 4rem 0;
+            align-items: center;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: left;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .code-block:hover {
+            border-color: rgba(102, 126, 234, 0.5);
+            transform: scale(1.02);
+        }
+
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .code-block h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .code-block pre {
+            color: #e0e0e0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+
+        .keyword {
+            color: #ff6b6b;
+        }
+
+        .string {
+            color: #4ecdc4;
+        }
+
+        .comment {
+            color: #95a5a6;
+        }
+
+        .function {
+            color: #f39c12;
+        }
+
+        .transform-arrow {
+            font-size: 3rem;
+            color: #667eea;
+            animation: slideIn 2s ease infinite;
+        }
+
+        @keyframes slideIn {
+
+            0%,
+            100% {
+                transform: translateX(-10px);
+            }
+
+            50% {
+                transform: translateX(10px);
+            }
+        }
+
+        /* Benefits Section */
+        .benefits {
+            padding: 8rem 0;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .benefit-card:hover::before {
+            opacity: 1;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .benefit-card p {
+            color: #a0a0a0;
+            line-height: 1.6;
+        }
+
+        /* Statistics Section */
+        .stats {
+            padding: 8rem 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .stat-item {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #667eea;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #a0a0a0;
+            font-size: 1.1rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 8rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 2rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 1s ease both;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .code-containers {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .transform-arrow {
+                transform: rotate(90deg);
+                margin: 1rem 0;
+            }
+
+            .paradigm-shift {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        /* Syntax Highlighting */
+        .line {
+            margin: 0.2rem 0;
+        }
+
+        .indent {
+            margin-left: 1rem;
+        }
+
+        .indent2 {
+            margin-left: 2rem;
+        }
+
+        /* Scroll animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-animation"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Agent-Oriented Programming</h1>
+                <p class="subtitle">The next evolution in software development</p>
+
+                <div class="paradigm-shift">
+                    <div class="paradigm-box">
+                        <h3>Object-Oriented</h3>
+                        <p>Classes & Methods</p>
+                        <code>class MyClass { }</code>
+                    </div>
+
+                    <div class="arrow">→</div>
+
+                    <div class="paradigm-box">
+                        <h3>Agent-Oriented</h3>
+                        <p>Agents & Tools</p>
+                        <code>agent MyAgent { }</code>
+                    </div>
+                </div>
+
+                <p style="color: #a0a0a0; max-width: 600px; margin: 2rem auto;">
+                    Just as OOP transformed software in the 1980s, AiOP will revolutionize how we build intelligent
+                    systems.
+                    Native language support for AI agents, tools, and orchestration.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Comparison Section -->
+    <section class="code-comparison">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">The Paradigm Shift</h2>
+
+            <div class="code-containers scroll-reveal">
+                <div class="code-block">
+                    <h4>❌ Traditional OOP</h4>
+                    <pre><code><span class="keyword">class</span> <span class="function">ResearchAgent</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, model):
+        self.model = model
+        self.api_key = "<span class="string">sk-...</span>"
+
+    <span class="comment"># Regular method - no AI awareness</span>
+    <span class="keyword">def</span> <span class="function">search</span>(self, query):
+        <span class="comment"># Manual API calls</span>
+        <span class="keyword">return</span> openai.chat.completions.create(
+            model=self.model,
+            messages=[{<span class="string">"role"</span>: <span class="string">"user"</span>,
+                      <span class="string">"content"</span>: query}]
+        )
+
+    <span class="keyword">def</span> <span class="function">analyze</span>(self, data):
+        <span class="comment"># More manual orchestration</span>
+        <span class="keyword">return</span> self.model.generate(data)</code></pre>
+                </div>
+
+                <div class="transform-arrow">⚡</div>
+
+                <div class="code-block">
+                    <h4>✨ Agent-Oriented Programming</h4>
+                    <pre><code><span class="keyword">agent</span> <span class="function">ResearchAgent</span>():
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, model=<span class="string">"gpt-4"</span>,
+                 provider=<span class="string">"OpenAI"</span>,
+                 temperature=<span class="string">0.7</span>):
+        <span class="keyword">super</span>().__init__(model, provider, temperature)
+
+    <span class="comment"># Native AI tool - language understands AI</span>
+    <span class="keyword">tool</span> <span class="function">search</span>(self, query: str) -> SearchResults:
+        <span class="comment"># Automatic model integration</span>
+        <span class="keyword">return</span> web_search_api(query)
+
+    <span class="keyword">tool</span> <span class="function">analyze</span>(self, data: str) -> Analysis:
+        <span class="comment"># Built-in AI orchestration</span>
+        <span class="keyword">return</span> llm_analyze(data)</code></pre>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <p style="font-size: 1.2rem; color: #667eea;">
+                    <strong>From manual AI integration to native language constructs</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Why Agent-Oriented Programming?</h2>
+
+            <div class="benefits-grid">
+                <div class="benefit-card scroll-reveal">
+                    <div class="benefit-icon">🚀</div>
+                    <h3>35-50% Faster Development</h3>
+                    <p>Native agent constructs eliminate boilerplate code and reduce integration complexity. Build
+                        intelligent systems as naturally as you build objects.</p>
+                </div>
+
+                <div class="benefit-card scroll-reveal">
+                    <div class="benefit-icon">🔗</div>
+                    <h3>Universal Interoperability</h3>
+                    <p>Agents work across frameworks and languages. No more vendor lock-in or fragmented ecosystems.
+                        True standardization for AI development.</p>
+                </div>
+
+                <div class="benefit-card scroll-reveal">
+                    <div class="benefit-icon">🛠️</div>
+                    <h3>Tool Inheritance & Composition</h3>
+                    <p>Tools inherit and compose like methods, but with AI-specific capabilities. Build complex agent
+                        workflows through simple inheritance patterns.</p>
+                </div>
+
+                <div class="benefit-card scroll-reveal">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Type-Safe AI Operations</h3>
+                    <p>Compile-time verification of agent contracts and tool signatures. Catch AI integration errors
+                        before runtime.</p>
+                </div>
+
+                <div class="benefit-card scroll-reveal">
+                    <div class="benefit-icon">🌐</div>
+                    <h3>Web-Native Integration</h3>
+                    <p>New HTML elements like &lt;agent&gt; and &lt;tool&gt; bring AI directly to the web platform. REST
+                        APIs designed for agent operations.</p>
+                </div>
+
+                <div class="benefit-card scroll-reveal">
+                    <div class="benefit-icon">⚙️</div>
+                    <h3>Built-in Orchestration</h3>
+                    <p>Parallel tool execution, circuit breakers, and retry policies built into the language runtime.
+                        Production-ready by default.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">The Agent Revolution</h2>
+
+            <div class="stats-grid">
+                <div class="stat-item scroll-reveal">
+                    <span class="stat-number">$52.6B</span>
+                    <span class="stat-label">AI Agents Market by 2030</span>
+                </div>
+
+                <div class="stat-item scroll-reveal">
+                    <span class="stat-number">99%</span>
+                    <span class="stat-label">Developers Exploring Agents</span>
+                </div>
+
+                <div class="stat-item scroll-reveal">
+                    <span class="stat-number">371</span>
+                    <span class="stat-label">Average Enterprise Apps</span>
+                </div>
+
+                <div class="stat-item scroll-reveal">
+                    <span class="stat-number">95%</span>
+                    <span class="stat-label">Planning Tool Consolidation</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 4rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                <p style="font-size: 1.2rem; color: #a0a0a0; text-align: center;">
+                    The fragmentation crisis is real. Hundreds of frameworks, incompatible protocols, and N×M
+                    integration problems.
+                    <strong style="color: #667eea;">AiOP provides the unifying paradigm the industry desperately
+                        needs.</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Vision Section -->
+    <section class="code-comparison" style="background: rgba(255, 255, 255, 0.02);">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Multi-Language Support</h2>
+
+            <div class="code-containers scroll-reveal">
+                <div class="code-block">
+                    <h4>🐍 Python</h4>
+                    <pre><code><span class="keyword">agent</span> <span class="function">DataProcessor</span>():
+    <span class="keyword">tool</span> <span class="function">validate</span>(self, data: List[Dict]):
+        <span class="keyword">return</span> ValidationResult(data)
+
+    <span class="keyword">tool</span> <span class="function">process</span>(self, data: List[Dict]):
+        validated = self.validate(data)
+        <span class="keyword">return</span> ProcessResult(validated)</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <h4>⚡ JavaScript</h4>
+                    <pre><code><span class="keyword">agent</span> <span class="function">APIAgent</span>(BaseAgent) {
+    <span class="keyword">tool</span> async <span class="function">fetchData</span>(url: string) {
+        <span class="keyword">return</span> fetch(url).then(r => r.json());
+    }
+
+    <span class="keyword">tool</span> async <span class="function">processResponse</span>(response) {
+        <span class="keyword">return</span> { processed: response.data };
+    }
+}</code></pre>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <p style="color: #667eea; font-size: 1.1rem;">
+                    <strong>Consistent syntax across all major programming languages</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Join the Agent-Oriented Future</h2>
+            <p style="font-size: 1.3rem; color: #a0a0a0; max-width: 700px; margin: 0 auto;" class="scroll-reveal">
+                The paradigm shift is happening now. Be part of the movement that will define the next era of software
+                development.
+            </p>
+
+            <div style="margin-top: 3rem;" class="scroll-reveal">
+                <a href="#" class="cta-button">Read the Full Proposal</a>
+                <a href="#" class="cta-button"
+                    style="margin-left: 1rem; background: transparent; border: 2px solid #667eea;">Join the
+                    Community</a>
+            </div>
+
+            <div style="margin-top: 3rem; color: #666;">
+                <p>Ready to transform how the world builds intelligent systems?</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) =>
+        {
+            entries.forEach(entry =>
+            {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all scroll-reveal elements
+        document.querySelectorAll('.scroll-reveal').forEach(el =>
+        {
+            observer.observe(el);
+        });
+
+        // Animate statistics counter
+        function animateCounter (element, target, duration = 2000)
+        {
+            let start = 0;
+            const increment = target / (duration / 16);
+
+            function updateCounter ()
+            {
+                start += increment;
+                if (start < target) {
+                    element.textContent = Math.floor(start) + (element.textContent.includes('$') ? 'B' : element.textContent.includes('%') ? '%' : '');
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = element.getAttribute('data-target');
+                }
+            }
+            updateCounter();
+        }
+
+        // Add data-target attributes and animate when visible
+        const statNumbers = document.querySelectorAll('.stat-number');
+        statNumbers.forEach(stat =>
+        {
+            const text = stat.textContent;
+            stat.setAttribute('data-target', text);
+
+            observer.observe(stat);
+            stat.addEventListener('revealed', () =>
+            {
+                const target = parseFloat(text.replace(/[^0-9.]/g, ''));
+                animateCounter(stat, target);
+            });
+        });
+
+        // Add floating particles effect
+        function createParticle ()
+        {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: fixed;
+                width: 2px;
+                height: 2px;
+                background: rgba(102, 126, 234, 0.5);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: -1;
+                animation: float 15s linear infinite;
+            `;
+
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+
+            document.body.appendChild(particle);
+
+            setTimeout(() => particle.remove(), 15000);
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 300);
+
+        // Add CSS for floating animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0% {
+                    transform: translateY(100vh) scale(0);
+                    opacity: 1;
+                }
+                10% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                90% {
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-10vh) scale(0);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+
+</html>
